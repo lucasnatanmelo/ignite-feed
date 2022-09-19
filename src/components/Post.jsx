@@ -1,46 +1,65 @@
-import styles from './Post.module.css'
-import { Comment } from './Comment'
+import { format, formatDistanceToNow } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
 
-export function Post(){
-  return(
+import styles from "./Post.module.css";
+import { Comment } from "./Comment";
+import { Avatar } from "./Avatar";
+import { LineSegment } from "phosphor-react";
+
+export function Post({ author, publishedAt, content }) {
+  const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+    locale: ptBR,
+  });
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  });
+
+  return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <img className={styles.avatar} src="https://github.com/lucasnatanmelo.png" />
+          <Avatar hasBorder src={author.avatarUrl} />
           <div className={styles.authorInfo}>
-            <strong>Lucas Natan</strong>
-            <span>Software Developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
 
-        <time title="06 de setembro de 2022 às 20:46" dateTime="2022-09-06 20:46:10">Publicado há 1h</time>
+        <time title={publishedDateFormatted} dateTime={publishedAt.toISOString()}>
+          {publishedDateRelativeToNow}
+        </time>
       </header>
 
-      <div className={styles.content}>
-        <p>Oi pessoal, acabei de subir conteúdo novo no meu portifólio.</p> {''}
-        <p>
-          <a href="">Link</a> {''}
-          <a href="">#Novo projeto #vem </a> {''}
-        </p>
+      <div className={content}>
+        {content.map((item) => {
+          if (item.type === "paragraph") {
+            return <p>{item.content}</p>;
+          } else if (item.content === "link") {
+            return (
+              <p>
+                <a href="">{item.content}</a>
+              </p>
+            );
+          }
+        })}
       </div>
 
       <form className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
-        <textarea
-          placeholder='Deixe seu comentário'
-        />
+        <textarea placeholder="Deixe seu comentário" />
 
         <footer>
           <button type="submit">Publicar</button>
         </footer>
 
         <div className={styles.commentList}>
-          <Comment/>
-          <Comment/>
-          <Comment/>
+          <Comment />
+          <Comment />
+          <Comment />
         </div>
-
       </form>
     </article>
-  )
+  );
 }

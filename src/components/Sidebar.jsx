@@ -1,26 +1,25 @@
-import {PencilLine} from 'phosphor-react'
-import styles from './Sidebar.module.css';
+import { PencilLine } from "phosphor-react";
+import styles from "./Sidebar.module.css";
+import { Avatar } from "./Avatar";
 
-export function Sidebar(){
-  return(
+export function Sidebar() {
+  return (
     <aside className={styles.sidebar}>
-      <img 
+      <img
         className={styles.cover}
-        src="https://images.unsplash.com/photo-1605379399843-5870eea9b74e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=50" 
+        src="https://images.unsplash.com/photo-1605379399843-5870eea9b74e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=50"
       />
       <div className={styles.profile}>
-        <img className={styles.avatar} src="https://github.com/lucasnatanmelo.png" alt="Profile Picture" />
-
+        <Avatar src="https://github.com/lucasnatanmelo.png" />
         <strong>Lucas Natan</strong>
         <span>Software Developer</span>
       </div>
       <footer>
         <a href="#">
-          <PencilLine size={20}/>
+          <PencilLine size={20} />
           Editar o seu perfil
         </a>
       </footer>
     </aside>
   );
 }
-

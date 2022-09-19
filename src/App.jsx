@@ -1,36 +1,71 @@
-import {Post} from './components/Post'
-import {Header} from './components/Header'
-import { Sidebar } from './components/Sidebar';
+import { Post } from "./components/Post";
+import { Header } from "./components/Header";
+import { Sidebar } from "./components/Sidebar";
 
-import styles from './App.module.css';
-import './global.css'
+import styles from "./App.module.css";
+import "./global.css";
+
+const posts = [
+  {
+    id: 1,
+    author: {
+      avatarUrl: "https://github.com/lucasnatanmelo.png",
+      name: "Lucas Natan",
+      role: "Software Enginner",
+    },
+    content: [
+      { type: "paragraph", content: "Oi pessoal, " },
+      { type: "paragraph", content: "Acabei de subir conteúdo novo no meu portifólio. " },
+      { type: "link", content: "jane.design/doctorcare" },
+    ],
+    publishedAt: new Date("2022-05-03 20:00:00"),
+  },
+  {
+    id: 2,
+    author: {
+      avatarUrl: "https://github.com/diego3g.png",
+      name: "Diego Fernandes",
+      role: "Software Enginner",
+    },
+    content: [
+      { type: "paragraph", content: "Oi pessoal, " },
+      { type: "paragraph", content: "Acabei de subir conteúdo novo no meu portifólio. " },
+      { type: "link", content: "jane.design/doctorcare" },
+    ],
+    publishedAt: new Date("2022-05-03 20:00:00"),
+  },
+  {
+    id: 3,
+    author: {
+      avatarUrl: "https://github.com/maikybrito.png",
+      name: "Maiky Brito",
+      role: "Software Enginner",
+    },
+    content: [
+      { type: "paragraph", content: "Oi pessoal, " },
+      { type: "paragraph", content: "Acabei de subir conteúdo novo no meu portifólio. " },
+      { type: "link", content: "jane.design/doctorcare" },
+    ],
+    publishedAt: new Date("2022-05-03 20:00:00"),
+  },
+];
 
 function App() {
-
   return (
     <>
-      <Header/>
-      
-      <div className={styles.wrapper}>
+      <Header />
 
-        <Sidebar/>
-        
+      <div className={styles.wrapper}>
+        <Sidebar />
+
         <main>
-          <Post
-            author="Lucas Natan"
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur architecto totam ullam voluptatibus quia, quo eos aut neque quos ipsum sint molestias impedit hic? Laboriosam molestiae aliquam magni ab illum."
-          />
-          <Post
-            author="Diego Fernandes"
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur architecto totam ullam voluptatibus quia, quo eos aut neque quos ipsum sint molestias impedit hic? Laboriosam molestiae aliquam magni ab illum."
-          />
+          {posts.map((post) => {
+            return <Post author={post.author} content={post.content} publishedAt={post.publishedAt} />;
+          })}
         </main>
       </div>
-
     </>
-  )
+  );
 }
 
-export default App
-
-
+export default App;
